@@ -1,0 +1,24 @@
+The issue lies in the order of calculation when using percentages and viewport units together within `calc()`.  The browser's interpretation of these units in conjunction might not follow the expected mathematical order.  To resolve this:
+
+**Avoid Combining Percentages and Viewport Units in `calc()`**: The most straightforward solution is to avoid mixing percentages and viewport units within a single `calc()` function.  Instead, break down the calculation into simpler steps or use different units.
+
+**Example (Bug):**
+```css
+.element {
+  width: calc(50% - 10vw);
+}
+```
+**Example (Solution):**
+```css
+/* Option 1: Absolute Values */
+.element {
+  width: calc(500px - 10vw);
+}
+
+/* Option 2: Pre-Calculated Values (using Javascript recommended if dynamic)*/
+.element {
+  width: 300px; /* precalculated value*/
+}
+```
+
+By avoiding mixed units, you ensure a consistent and predictable result from the `calc()` function.
